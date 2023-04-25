@@ -1,6 +1,2 @@
-fileignoreconfig:
-- filename: opensearch/docker-compose.yaml
-  checksum: 8337f3a0f7c403b8b52aa57be8b0a4056313c64b3ccbea5561afbe4820575c6e
-- filename: opensearch/opensearch-dashboards.yml
-  checksum: 1683a79cce42fdc11a7748ba4aefdc3e060fd89f7a43bccc29ddcc38627cc933
+severity: medium
 version: "1.0"
