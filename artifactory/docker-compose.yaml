@@ -1,0 +1,45 @@
+version: '3'
+
+networks:
+  artifactory_net:
+
+services:
+  artifactory:
+    image: docker.bintray.io/jfrog/artifactory-oss:latest
+    container_name: artifactory
+    ports:
+      - "8081:8081"
+    environment:
+      - DB_TYPE=postgresql
+      # - DB_URL=jdbc:postgresql://postgresql:5432/artifactory
+      - DB_USERNAME=artifactory
+      - DB_PASSWORD=password
+      - EXTRA_JAVA_OPTIONS=-Xms1g -Xmx3g
+    networks:
+      - artifactory_net
+    depends_on:
+      - postgresql
+    links:
+     - postgresql
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 32000
+        hard: 40000
+
+  postgresql:
+    image: postgres:latest
+    container_name: postgresql
+    ports:
+     - 5432:5432
+    environment:
+      - POSTGRES_USER=artifactory
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=artifactory
+    networks:
+      - artifactory_net
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 32000
+        hard: 40000

@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  artipie:
+    image: artipie/artipie:latest
+    ports:
+      - "8083:8080"
+    volumes:
+      - ./config:/var/artipie/config
+      - ./data:/var/artipie/data
