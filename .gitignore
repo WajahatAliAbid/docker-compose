@@ -3,3 +3,4 @@ artifactory/data
 artifactory/logs
 artipie/config
 artipie/data
+mongodb/data
