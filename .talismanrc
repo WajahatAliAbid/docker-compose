@@ -1,2 +1,9 @@
+fileignoreconfig:
+- filename: supabase/.env
+  checksum: 80a66c8f7502274368bb3a1078cc18886c2f8107bcad9e9e5f464186ce77083f
+- filename: supabase/docker-compose.yaml
+  checksum: e0ba12da5c2880c46d38970de63508e364c5189dedbb7f8969d08002696514fb
+- filename: supabase/volumes/api/kong.yml
+  checksum: 5b2ad5a68655808b7825268270f1d9323dfe26a4e6608edbe60c349555cdfea4
 threshold: medium
 version: "1.0"
