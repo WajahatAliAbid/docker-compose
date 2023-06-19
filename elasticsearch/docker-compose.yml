@@ -6,7 +6,7 @@ services:
     environment:
       - xpack.security.enabled=false
       - "discovery.type=single-node"
-      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
     networks:
       - es-net
     ports:
