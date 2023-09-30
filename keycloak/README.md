@@ -4,4 +4,4 @@ Find detailed documentation [here](https://www.keycloak.org/server/containers). 
 docker compose pull
 docker compose up
 ```
-Open browser in port 8080 and start browsing
+Open browser in port 8180 and start browsing
