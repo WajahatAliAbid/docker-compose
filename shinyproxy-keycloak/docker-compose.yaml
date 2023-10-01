@@ -1,0 +1,43 @@
+version: '3'
+services:
+  keycloak:
+    image: jboss/keycloak
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=adminpassword
+      - DB_VENDOR=POSTGRES
+      - DB_ADDR=shinyproxy-db
+      - DB_DATABASE=keycloak
+      - DB_USER=keycloak
+      - DB_PASSWORD=dbpassword
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    depends_on:
+      - shinyproxy-db
+    networks:
+      - keycloak-network
+
+  shinyproxy-db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=dbpassword
+    networks:
+      - keycloak-network
+  
+  shinyproxy:
+    image: openanalytics/shinyproxy:3.0.2
+    volumes:
+      - "./application.yml:/opt/shinyproxy/application.yml"
+    ports:
+      - "8090:8080"
+    networks:
+      - keycloak-network
+    depends_on:
+      - keycloak
+
+networks:
+  keycloak-network:
+    driver: bridge

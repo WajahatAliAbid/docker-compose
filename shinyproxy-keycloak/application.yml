@@ -1,0 +1,14 @@
+proxy:
+  authentication: keycloak
+  keycloak:
+    realm: yoursso
+    auth-server-url: http://localhost:8080/auth
+    resource: yourresource
+    credentials-secret: your-credentials-secret
+  specs:
+  - id: flask-demo
+    container-image: openanalytics/shinyproxy-flask-demo
+    port: 8080
+    container-env:
+      SCRIPT_NAME: "#{proxy.getRuntimeValue('SHINYPROXY_PUBLIC_PATH').replaceFirst('/$','')}"
+    target-path: "#{proxy.getRuntimeValue('SHINYPROXY_PUBLIC_PATH')}"
