@@ -36,8 +36,10 @@ services:
   
   shinyproxy:
     image: openanalytics/shinyproxy:3.0.2
+    user: root
     volumes:
       - "./application.yml:/opt/shinyproxy/application.yml"
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - "8090:8080"
     networks:
