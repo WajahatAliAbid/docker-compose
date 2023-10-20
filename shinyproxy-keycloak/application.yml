@@ -1,0 +1,31 @@
+proxy:
+  authentication: keycloak
+  container-wait-time: 200000
+  keycloak:
+    realm: master
+    auth-server-url: http://keycloak:8080/auth
+    resource: shinyproxy
+    credentials-secret: cqEQdL6POt5Z3fWCsDEIN7slcq8UOoBr
+    logout-url: http://keycloak:8080/auth/realms/master/protocol/openid-connect/logout
+    proxy.keycloak.name-attribute: email
+  specs:
+  - id: 01_hello
+    display-name: Hello Application
+    description: Application which demonstrates the basics of a Shiny app.
+    container-cmd: ["R", "-e", "shinyproxy::run_01_hello()"]
+    container-image: openanalytics/shinyproxy-demo
+    container-network: shinyproxy-keycloak_keycloak-network
+    access-groups: [ my-first-app ]
+  docker:
+    internal-networking: true
+  container-log-path: ./container-logs
+logging:
+  file:
+    shinyproxy.log
+server:
+  forward-headers-strategy: native
+spring:
+    servlet:
+        multipart:
+            max-file-size: 1024MB
+            max-request-size: 1024MB
