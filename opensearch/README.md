@@ -1,16 +1,11 @@
 # Setup
 
-1. Generate certificates
-```bash
-bash ./generate_certs.sh
-```
-
-2. Pull images
+1. Pull images
 ```bash
 docker-compose pull
 ```
 
-3. Run
+2. Run
 ```bash
 docker-compose up
 ```
