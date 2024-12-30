@@ -81,12 +81,12 @@ services:
         soft: -1
         hard: -1
     
-  opensearch_cord:
-    container_name: opensearch_cord
+  opensearch_c01:
+    container_name: opensearch_c01
     image: opensearchproject/opensearch:2.18.0
     environment:
       OPENSEARCH_JAVA_OPTS: "-Xms2g -Xmx2g" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
-      node.name: opensearch_cord
+      node.name: opensearch_c01
       discovery.seed_hosts: opensearch_master,opensearch_d01,opensearch_d02,opensearch_d03
       DISABLE_INSTALL_DEMO_CONFIG: "true"
       DISABLE_SECURITY_PLUGIN: "true"
