@@ -42,9 +42,6 @@ services:
       memlock:
         soft: -1
         hard: -1
-    ports:
-      - 9200:9200
-      - 9600:9600 # required for Performance Analyzer
   
   opensearch_d02:
     container_name: opensearch_d02
@@ -83,6 +80,28 @@ services:
       memlock:
         soft: -1
         hard: -1
+    
+  opensearch_cord:
+    container_name: opensearch_cord
+    image: opensearchproject/opensearch:2.18.0
+    environment:
+      OPENSEARCH_JAVA_OPTS: "-Xms2g -Xmx2g" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+      node.name: opensearch_cord
+      discovery.seed_hosts: opensearch_master,opensearch_d01,opensearch_d02,opensearch_d03
+      DISABLE_INSTALL_DEMO_CONFIG: "true"
+      DISABLE_SECURITY_PLUGIN: "true"
+      JAVA_HOME: /usr/share/opensearch/jdk
+      bootstrap.memory_lock: "true" # along with the memlock settings below, disables swapping
+      network.host: "0.0.0.0"
+    networks:
+      - os-net
+    ulimits: 
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+      - 9600:9600 # required for Performance Analyzer
   
   kibana:
     container_name: opensearch_dashboards
