@@ -1,10 +1,21 @@
-version: '3'
-
 services:
   mongo:
-    image: mongo:latest
+    image: mongo:7
+    command: ["--bind_ip_all", "--port", "27017"]
     restart: always
     ports:
       - 27017:27017
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: mongosh --port 27017 --eval "db.runCommand('ping').ok"
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
-      - ./data:/data/db
+      - "mongo1_data:/data/db"
+      - "mongo1_config:/data/configdb"
+
+volumes:
+  mongo1_data:
+  mongo1_config:
