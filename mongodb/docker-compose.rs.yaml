@@ -1,3 +1,4 @@
+# Single node with replica set
 services:
   mongo:
     image: mongo:7
